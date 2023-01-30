@@ -1,22 +1,28 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.http import HttpResponse, HttpResponseNotFound , HttpResponseRedirect
+
+data = {
+    "programlama":"programlama kategorisine ait kurslar",
+    "web-gelistirme":"web gelistirme kategorisine ait kurslar",
+    "mobil":"mobil kategorisine ait kurslar",
+}
 
 def kurslar(request):
     return HttpResponse("kurs listesi")
 def details(request, kurs_adi):
     return HttpResponse(f"{kurs_adi} kursu detayları")  
 def getCoursesByCategory(request, category_name):
-    text = ""
-    if category_name == "programlama":
-        text = "programlama kategorisine ait kurslar"
-    elif category_name == "web-gelistirme":
-        text = "web gelistirme kategorisine ait kurslar"
-    else:
-        text = "Bu kategori bizde bulunmamaktadır."        
-    return HttpResponse(text)       
+    try:
+        category_text = data[category_name]
+        return HttpResponse(category_text)      
+    except:
+        return HttpResponseNotFound("Yanlış kategori seçimi")    
 
 def getCoursesByCategoryId(request, category_id):
-    return HttpResponse(category_id)
+    # 1-2-3 => 
+    category_list = list(data.keys())
+    redirect_text = category_list[category_id - 1]
+    return redirect('/kurs/kategori/' + redirect_text)
 
 
 
