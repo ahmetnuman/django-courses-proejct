@@ -4,7 +4,7 @@ from . import views
 #http://127.0.0.1:8000/kurslar => kurs listesi
 
 urlpatterns = [
-    path("", views.kurslar),
+    path("", views.index),
     path('list', views.kurslar),
     path('<kurs_adi>', views.details),
     path('kategori/<int:category_id>', views.getCoursesByCategoryId),

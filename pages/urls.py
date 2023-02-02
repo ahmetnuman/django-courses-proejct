@@ -6,9 +6,9 @@ from . import views
 #http://127.0.0.1:8000/anasayfa => anasayfa
 
 urlpatterns = [
-    path('', views.home),
-    path('home/', views.home),
-    path('anasayfa/', views.home),
-    path('iletisim/', views.iletisim),
-    path('hakkimizda/', views.hakkimizda),
+    path('', views.index),
+    path('home', views.index),
+    path('index', views.index),
+    path('contact', views.contact),
+    path('about', views.about),
 ]
